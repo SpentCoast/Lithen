@@ -2,8 +2,9 @@
 
 // For use by Lithin applications
 
-#include "Lithin/Application.h"
+#include "Lithen/Application.h"
+#include "Lithen/Log.h"
 
 // ---------------Entry Point---------------
-#include "Lithin/EntryPoint.h"
+#include "Lithen/EntryPoint.h"
 // -----------------------------------------

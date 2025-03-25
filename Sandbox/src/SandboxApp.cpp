@@ -1,6 +1,6 @@
-#include <Lithin.h>
+#include <Lithen.h>
 
-class Sandbox : public Lithin::Application
+class Sandbox : public Lithen::Application
 {
 public:
 	Sandbox()
@@ -14,7 +14,7 @@ public:
 	}
 };
 
-Lithin::Application* Lithin::CreateApplication()
+Lithen::Application* Lithen::CreateApplication()
 {
 	return new Sandbox();
 }

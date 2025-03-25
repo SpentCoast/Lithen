@@ -2,9 +2,9 @@
 
 #include "Core.h"
 
-namespace Lithin
+namespace Lithen
 {
-	class LITHIN_API Application
+	class LITHEN_API Application
 	{
 	public:
 		Application();
