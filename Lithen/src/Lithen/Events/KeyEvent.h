@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Lithen
 {
 	class LITHEN_API KeyEvent : public Event

@@ -34,6 +34,7 @@
     <ClInclude Include="src\Lithen\Log.h">
       <Filter>Lithen</Filter>
     </ClInclude>
+    <ClInclude Include="src\lnpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lithen\Application.cpp">
@@ -42,5 +43,6 @@
     <ClCompile Include="src\Lithen\Log.cpp">
       <Filter>Lithen</Filter>
     </ClCompile>
+    <ClCompile Include="src\lnpch.cpp" />
   </ItemGroup>
 </Project>

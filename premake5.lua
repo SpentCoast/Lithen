@@ -18,6 +18,9 @@ project "Lithen"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "lnpch.h"
+	pchsource "Lithen/src/lnpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

@@ -2,9 +2,6 @@
 
 #include "Lithen/Core.h"
 
-#include <string>
-#include <functional>
-
 namespace Lithen
 {
 	enum class EventType
