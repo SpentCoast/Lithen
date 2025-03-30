@@ -41,3 +41,4 @@ namespace Lithen
 #define LN_INFO(...)           ::Lithen::Log::GetClientLogger()->info(__VA_ARGS__)
 #define LN_WARN(...)           ::Lithen::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define LN_ERROR(...)          ::Lithen::Log::GetClientLogger()->error(__VA_ARGS__)
+#define LN_CRITICAL(...)       ::Lithen::Log::GetClientLogger()->critical(__VA_ARGS__)
