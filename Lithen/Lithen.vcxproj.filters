@@ -37,6 +37,12 @@
     <ClInclude Include="src\Lithen\Events\MouseEvent.h">
       <Filter>Lithen\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lithen\Layer.h">
+      <Filter>Lithen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lithen\LayerStack.h">
+      <Filter>Lithen</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lithen\Log.h">
       <Filter>Lithen</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lithen\Application.cpp">
+      <Filter>Lithen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lithen\Layer.cpp">
+      <Filter>Lithen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lithen\LayerStack.cpp">
       <Filter>Lithen</Filter>
     </ClCompile>
     <ClCompile Include="src\Lithen\Log.cpp">

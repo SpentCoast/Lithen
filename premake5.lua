@@ -67,14 +67,17 @@ project "Lithen"
 
 	filter "configurations:Debug"
 		defines "LN_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LN_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LN_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -116,12 +119,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "LN_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LN_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LN_DIST"
+		buildoptions "/MD"
 		optimize "On"

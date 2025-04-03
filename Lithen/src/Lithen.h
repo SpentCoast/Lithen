@@ -3,6 +3,7 @@
 // For use by Lithin applications
 
 #include "Lithen/Application.h"
+#include "Lithen/Layer.h"
 #include "Lithen/Log.h"
 
 // ---------------Entry Point---------------
