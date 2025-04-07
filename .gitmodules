@@ -4,3 +4,6 @@
 [submodule "Lithen/vendor/GLFW"]
 	path = Lithen/vendor/GLFW
 	url = https://github.com/SpentCoast/glfw.git
+[submodule "Lithen/vendor/imgui"]
+	path = Lithen/vendor/imgui
+	url = https://github.com/SpentCoast/imgui.git

@@ -25,6 +25,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new TestLayer());
+		PushOverlay(new Lithen::ImGuiLayer());
 	}
 
 	~Sandbox()
