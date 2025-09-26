@@ -4,10 +4,10 @@
 
 namespace Lithen
 {
-	class LITHEN_API MouseButtonReleasedEvent : public Event
+	class LITHEN_API MouseMovedEvent : public Event
 	{
 	public:
-		MouseButtonReleasedEvent(float x, float y)
+		MouseMovedEvent(float x, float y)
 			: m_XOffset{ x }, m_YOffset{ y }
 		{
 		}
@@ -67,10 +67,10 @@ namespace Lithen
 		int m_Button;
 	};
 
-	class LITHEN_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class LITHEN_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int button)
+		MouseButtonPressedEvent(int button)
 			: MouseButtonEvent{ button }
 		{
 		}
