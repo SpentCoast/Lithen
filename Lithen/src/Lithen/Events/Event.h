@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Lithen/Core.h>
+#include "lnpch.h"
+#include "Lithen/Core.h"
 
 namespace Lithen
 {

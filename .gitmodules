@@ -1,3 +1,6 @@
 [submodule "Lithen/vendor/spdlog"]
 	path = Lithen/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Lithen/vendor/GLFW"]
+	path = Lithen/vendor/GLFW
+	url = https://github.com/SpentCoast/glfw.git

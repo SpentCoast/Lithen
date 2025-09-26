@@ -7,6 +7,12 @@
     <Filter Include="Lithen\Events">
       <UniqueIdentifier>{0D452868-7905-A49E-4240-ED1BAEBFE87A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lithen.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\Lithen\Log.h">
       <Filter>Lithen</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lithen\Window.h">
+      <Filter>Lithen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\lnpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\Lithen\Log.cpp">
       <Filter>Lithen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
   </ItemGroup>
