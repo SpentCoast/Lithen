@@ -2,8 +2,8 @@
 
 // For the use of Lithen applications
 
-#include <iostream>
 #include "Lithen/Application.h"
+#include "Lithen/Log.h"
 
 // --- Entry Point ---
 #include "Lithen/EntryPoint.h"

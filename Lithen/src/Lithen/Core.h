@@ -10,3 +10,4 @@
 #error Lithen only supports Windows!
 #endif // LN_PLATFORM_WINDOWS
 
+#define BIT(x) (1 << x)

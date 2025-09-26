@@ -6,12 +6,13 @@ extern Lithen::Application* Lithen::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	std::cout << "Welcome to Lithen engine!" << std::endl;
+	Lithen::Log::Init();
+	LN_CORE_WARN("Initialized Log!");
+	LN_INFO("Hello!");
+
 	auto app = Lithen::CreateApplication();
 	app->Run();
 	delete app;
-	return 0;
 }
 
 #endif // LN_PLATFORM_WINDOWS
-
