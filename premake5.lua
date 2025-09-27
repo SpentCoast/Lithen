@@ -13,8 +13,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Lithen/vendor/GLFW/include"
+IncludeDir["glad"] = "Lithen/vendor/glad/include"
 
 include "Lithen/vendor/GLFW"
+include "Lithen/vendor/glad"
 
 project "Lithen"
 	location "Lithen"
@@ -37,12 +39,14 @@ project "Lithen"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"glad",
 		"opengl32.lib",
 		"dwmapi.lib"
 	}
@@ -60,7 +64,8 @@ project "Lithen"
 		defines
 		{
 			"LN_PLATFORM_WINDOWS",
-			"LN_BUILD_DLL"
+			"LN_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
