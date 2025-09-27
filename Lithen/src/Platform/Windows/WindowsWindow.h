@@ -16,6 +16,7 @@ namespace Lithen
 
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
+		inline GLFWwindow* GetNativeWindow() const { return m_Window; }
 
 		// window attributes
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }

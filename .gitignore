@@ -1,4 +1,6 @@
 /.vs
 /bin
 /bin-int
+/Lithen/vendor/glad/bin
+/Lithen/vendor/glad/bin-int
 *.user
