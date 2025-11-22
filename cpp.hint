@@ -1,0 +1,4 @@
+#define VK_CHECK(x) x
+#define VKAPI_ATTR
+#define VKAPI_CALL
+#define VK_NULL_HANDLE

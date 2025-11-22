@@ -8,14 +8,25 @@ int main()
 	std::cout << "Starting Game..." << std::endl;
 
 	Lithen::Window window;
-	if (!window.Inititalize())
+	if (!window.Initialize())
+	{
 		return -1;
+	}
 
 	Lithen::Renderer renderer;
 	if (!renderer.Initialize(window))
+	{
 		return -1;
+	}
 
-	std::cout << "Game Loop Started. Press Enter to exit." << std::endl;
-	std::cin.get();
+	std::cout << "Game Loop Started." << std::endl;
+
+	while (!window.ShouldClose())
+	{
+		window.OnUpdate();
+	}
+
+	renderer.Shutdown();
+
 	return 0;
 }

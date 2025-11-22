@@ -28,7 +28,7 @@ namespace Lithen
 		Window();
 		~Window();
 
-		bool Inititalize(const WindowProps& props = WindowProps());
+		bool Initialize(const WindowProps& props = WindowProps());
 
 		void OnUpdate();
 

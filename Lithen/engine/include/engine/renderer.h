@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <vulkan/vulkan_core.h>
+#include <vulkan/vk_platform.h>
 
 namespace Lithen
 {
@@ -22,8 +23,19 @@ namespace Lithen
 		bool CheckValidationLayerSupport();
 		std::vector<const char*> GetRequiredExtensions() const;
 
+		void SetupDebugMessenger();
+		void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+
+		static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
+			VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+			VkDebugUtilsMessageTypeFlagsEXT messageType,
+			const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+			void* pUserData);
+
 	private:
 		VkInstance m_Instance;
+		VkDebugUtilsMessengerEXT m_DebugMessenger;
+		VkSurfaceKHR m_Surface;
 
 #ifdef NDEBUG
 		const bool m_EnableValidationLayers = false;

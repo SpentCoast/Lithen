@@ -7,6 +7,7 @@
 #include <cstdint>
 
 #include <vulkan/vulkan_core.h>
+#include <vulkan/vk_platform.h>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -22,7 +23,39 @@
 
 namespace Lithen
 {
-	Renderer::Renderer() : m_Instance{ VK_NULL_HANDLE }
+	static inline VkResult CreateDebugUtilsMessengerEXT(
+		VkInstance instance,
+		const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+		const VkAllocationCallbacks* pAllocator,
+		VkDebugUtilsMessengerEXT* pDebugMessenger)
+	{
+		auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+		if (func != nullptr)
+		{
+			return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
+		}
+		else
+		{
+			return VK_ERROR_EXTENSION_NOT_PRESENT;
+		}
+	}
+	
+	static inline void DestroyDebugUtilsMessengerEXT(
+		VkInstance instance,
+		VkDebugUtilsMessengerEXT debugMessenger,
+		const VkAllocationCallbacks* pAllocator)
+	{
+		auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+		if (func != nullptr)
+		{
+			func(instance, debugMessenger, pAllocator);
+		}
+	}
+
+	Renderer::Renderer() :
+		m_Instance{ VK_NULL_HANDLE },
+		m_DebugMessenger{ VK_NULL_HANDLE },
+		m_Surface{ VK_NULL_HANDLE }
 	{
 	}
 
@@ -33,8 +66,6 @@ namespace Lithen
 
 	bool Renderer::Initialize(Window& window)
 	{
-		(void)window;
-
 		std::cout << "[Renderer] Initializing Vulkan..." << std::endl;
 
 		if (m_EnableValidationLayers && !CheckValidationLayerSupport())
@@ -48,12 +79,32 @@ namespace Lithen
 			return false;
 		}
 
+		SetupDebugMessenger();
+
+		if (glfwCreateWindowSurface(m_Instance, window.GetNativeWindow(), nullptr, &m_Surface) != VK_SUCCESS)
+		{
+			std::cerr << "[Renderer] Failed to create window surface!" << std::endl;
+			return false;
+		}
+
 		std::cout << "[Renderer] Initialization Complete." << std::endl;
 		return true;
 	}
 
 	void Renderer::Shutdown()
 	{
+		if (m_DebugMessenger != VK_NULL_HANDLE)
+		{
+			DestroyDebugUtilsMessengerEXT(m_Instance, m_DebugMessenger, nullptr);
+			m_DebugMessenger = VK_NULL_HANDLE;
+		}
+
+		if (m_Surface != VK_NULL_HANDLE)
+		{
+			vkDestroySurfaceKHR(m_Instance, m_Surface, nullptr);
+			m_Surface = VK_NULL_HANDLE;
+		}
+
 		if (m_Instance != VK_NULL_HANDLE)
 		{
 			vkDestroyInstance(m_Instance, nullptr);
@@ -79,14 +130,19 @@ namespace Lithen
 		createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
 		createInfo.ppEnabledExtensionNames = extensions.data();
 
+		VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
 		if (m_EnableValidationLayers)
 		{
 			createInfo.enabledLayerCount = static_cast<uint32_t>(m_ValidationLayers.size());
 			createInfo.ppEnabledLayerNames = m_ValidationLayers.data();
+
+			PopulateDebugMessengerCreateInfo(debugCreateInfo);
+			createInfo.pNext = reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(&debugCreateInfo);
 		}
 		else
 		{
 			createInfo.enabledLayerCount = 0;
+			createInfo.pNext = nullptr;
 		}
 
 		VK_CHECK(vkCreateInstance(&createInfo, nullptr, &m_Instance));
@@ -107,6 +163,53 @@ namespace Lithen
 		}
 
 		return extensions;
+	}
+
+	void Renderer::SetupDebugMessenger()
+	{
+		if (!m_EnableValidationLayers)
+			return;
+
+		VkDebugUtilsMessengerCreateInfoEXT createInfo;
+		PopulateDebugMessengerCreateInfo(createInfo);
+
+		if (CreateDebugUtilsMessengerEXT(m_Instance, &createInfo, nullptr, &m_DebugMessenger) != VK_SUCCESS)
+		{
+			std::cerr << "[Renderer] Failed to set up debug messenger!" << std::endl;
+		}
+	}
+
+	void Renderer::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
+	{
+		createInfo = {};
+		createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+		createInfo.messageSeverity =
+			VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+		createInfo.messageType =
+			VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
+		createInfo.pfnUserCallback = DebugCallback;
+		createInfo.pUserData = nullptr;
+	}
+
+	VKAPI_ATTR VkBool32 VKAPI_CALL Renderer::DebugCallback(
+		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+		VkDebugUtilsMessageTypeFlagsEXT messageType,
+		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+		void* pUserData)
+	{
+		(void)messageType;
+		(void)pUserData;
+
+		if (messageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
+		{
+			std::cerr << "[Validation Layer]: " << pCallbackData->pMessage << std::endl;
+		}
+
+		return VK_FALSE;
 	}
 
 	bool Renderer::CheckValidationLayerSupport()

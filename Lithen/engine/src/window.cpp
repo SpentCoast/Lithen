@@ -7,6 +7,8 @@
 
 namespace Lithen
 {
+	static int s_WindowCount = 0;
+
 	Window::Window()
 	{
 	}
@@ -17,7 +19,7 @@ namespace Lithen
 	}
 
 
-	bool Window::Inititalize(const WindowProps& props)
+	bool Window::Initialize(const WindowProps& props)
 	{
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
@@ -25,10 +27,13 @@ namespace Lithen
 		
 		std::cout << "[Window] Initializing..." << std::endl;
 
-		if (!glfwInit())
+		if (s_WindowCount == 0)
 		{
-			std::cerr << "[Window] Failed to initialize GLFW!" << std::endl;
-			return false;
+			if (!glfwInit())
+			{
+				std::cerr << "[Window] Failed to initialize GLFW!" << std::endl;
+				return false;
+			}
 		}
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -39,10 +44,11 @@ namespace Lithen
 		if (!m_Window)
 		{
 			std::cerr << "[Window] Failed to create GLFW window!" << std::endl;
-			glfwTerminate();
+			if (s_WindowCount == 0) glfwTerminate();
 			return false;
 		}
 
+		s_WindowCount++;
 		return true;
 	}
 
@@ -52,8 +58,14 @@ namespace Lithen
 		if (m_Window)
 		{
 			glfwDestroyWindow(m_Window);
+			m_Window = nullptr;
+			s_WindowCount--;
 		}
-		glfwTerminate();
+
+		if (s_WindowCount == 0)
+		{
+			glfwTerminate();
+		}
 	}
 
 	void Window::OnUpdate()
