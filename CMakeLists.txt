@@ -10,6 +10,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(WIN32)
 	set(OUTPUT_BASE "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>-x64")
 endif()
+
+if(MSVC)
+	add_compile_options(/utf-8)
+endif()
 # ----------------------------
 
 # --------- Engine Core ---------
@@ -22,13 +26,13 @@ file(GLOB_RECURSE ENGINE_SOURCES
 )
 target_sources(Engine PRIVATE ${ENGINE_SOURCES})
 
+target_include_directories(Engine PUBLIC
+	"${CMAKE_CURRENT_SOURCE_DIR}/Engine/vendor/spdlog/include"
+)
+
 target_compile_definitions(Engine PRIVATE LN_BUILD_DLL)
 target_compile_definitions(Engine PUBLIC
 	$<$<PLATFORM_ID:Windows>:LN_PLATFORM_WINDOWS>
-)
-
-target_include_directories(Engine PUBLIC
-	"${CMAKE_CURRENT_SOURCE_DIR}/Engine/src"
 )
 
 set_target_properties(Engine PROPERTIES
@@ -50,6 +54,11 @@ target_link_libraries(Sandbox PRIVATE Engine)
 
 target_compile_definitions(Sandbox PUBLIC
 	$<$<PLATFORM_ID:Windows>:LN_PLATFORM_WINDOWS>
+)
+
+target_include_directories(Engine PUBLIC
+	"${CMAKE_CURRENT_SOURCE_DIR}/Engine/src"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Engine/vendor/spdlog/include"
 )
 
 set_target_properties(Sandbox PROPERTIES
