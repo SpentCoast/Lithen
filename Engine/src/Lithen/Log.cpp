@@ -1,3 +1,4 @@
+#include "lnpch.h"
 #include "Log.h"
 
 #include "spdlog/spdlog.h"

@@ -3,9 +3,6 @@
 #include "Event.h"
 #include "Lithen/Core.h"
 
-#include <sstream>
-#include <string>
-
 namespace Lithen
 {
 	class LITHEN_API MouseMovedEvent : public Event

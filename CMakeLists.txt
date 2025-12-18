@@ -27,7 +27,9 @@ file(GLOB_RECURSE ENGINE_SOURCES
 	"Engine/src/*.h"
 	"Engine/src/*.cpp"
 )
+target_precompile_headers(Engine PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Engine/src/lnpch.h")
 target_sources(Engine PRIVATE ${ENGINE_SOURCES})
+
 
 target_include_directories(Engine PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/Engine/src"
