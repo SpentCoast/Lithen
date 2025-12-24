@@ -1,5 +1,5 @@
 ﻿cmake_minimum_required(VERSION 3.10)
-project(LithenEngine VERSION 1.0)
+project(Lithen VERSION 1.0)
 
 # ---------- Global Setup ---------
 set(CMAKE_CXX_STANDARD 17)
