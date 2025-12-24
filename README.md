@@ -1,2 +1,2 @@
-# LithenEngine
+# Lithen
 Lithen Engine source code
