@@ -29,42 +29,42 @@ endif()
 # ----------------------------
 
 # --------- Engine Core ---------
-add_library(Engine SHARED)
-file(GLOB_RECURSE ENGINE_SOURCES
+add_library(Lithen SHARED)
+file(GLOB_RECURSE LITHEN_SOURCES
 	"Lithen/src/*.h"
 	"Lithen/src/*.cpp"
 )
-target_precompile_headers(Engine PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Lithen/src/lnpch.h")
-target_sources(Engine PRIVATE ${ENGINE_SOURCES})
+target_precompile_headers(Lithen PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Lithen/src/lnpch.h")
+target_sources(Lithen PRIVATE ${LITHEN_SOURCES})
 
 
-target_include_directories(Engine PUBLIC
+target_include_directories(Lithen PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/src"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/vendor/spdlog/include"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/vendor/glfw/include"
 )
 
-target_compile_definitions(Engine PRIVATE LN_BUILD_DLL)
-target_compile_definitions(Engine PUBLIC
+target_compile_definitions(Lithen PRIVATE LN_BUILD_DLL)
+target_compile_definitions(Lithen PUBLIC
 	$<$<PLATFORM_ID:Windows>:LN_PLATFORM_WINDOWS>
 	$<$<CONFIG:Debug>:LN_DEBUG>
 	$<$<CONFIG:Release>:LN_RELEASE>
 	$<$<CONFIG:Dist>:LN_DIST>
 )
 
-target_link_libraries(Engine PRIVATE glfw)
+target_link_libraries(Lithen PRIVATE glfw)
 
 if(WIN32)
-    target_link_libraries(Engine PRIVATE opengl32)
+    target_link_libraries(Lithen PRIVATE opengl32)
 endif()
 
-set_target_properties(Engine PROPERTIES
+set_target_properties(Lithen PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_BASE}/Lithen"
 	LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_BASE}/Lithen"
 	RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_BASE}/Lithen"
 )
 
-set_property(TARGET Engine PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<%<CONFIG:Debug>:Debug>")
+set_property(TARGET Lithen PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<%<CONFIG:Debug>:Debug>")
 # -------------------------------
 
 # --------- Lithen App ---------
@@ -75,7 +75,7 @@ file(GLOB_RECURSE LITHEN_APP_SOURCES
 )
 target_sources(LithenApp PRIVATE ${LITHEN_APP_SOURCES})
 
-target_link_libraries(LithenApp PRIVATE Engine)
+target_link_libraries(LithenApp PRIVATE Lithen)
 
 target_compile_definitions(LithenApp PUBLIC
 	$<$<PLATFORM_ID:Windows>:LN_PLATFORM_WINDOWS>
@@ -84,7 +84,7 @@ target_compile_definitions(LithenApp PUBLIC
 	$<$<CONFIG:Dist>:LN_DIST>
 )
 
-target_include_directories(Engine PUBLIC
+target_include_directories(Lithen PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/src"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/vendor/spdlog/include"
 )
@@ -95,7 +95,7 @@ set_target_properties(LithenApp PROPERTIES
 
 add_custom_command(TARGET LithenApp POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different
-	$<TARGET_FILE:Engine>
+	$<TARGET_FILE:Lithen>
 	$<TARGET_FILE_DIR:LithenApp>
 )
 
