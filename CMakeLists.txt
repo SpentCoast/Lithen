@@ -9,6 +9,12 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release;Dist" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS_DIST "${CMAKE_CXX_FLAGS_RELEASE}" CACHE STRING "" FORCE)
 set(CMAKE_EXE_LINKER_FLAGS_DIST "${CMAKE_EXE_LINKER_FLAGS_RELEASE}" CACHE STRING "" FORCE)
 set(CMAKE_SHARED_LINKER_FLAGS_DIST "${CMAKE_SHARED_LINKER_FLAGS_RELEASE}" CACHE STRING "" FORCE)
+
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+add_subdirectory("Lithen/vendor/glfw")
 # ---------------------------------
 
 # ---------- Helpers ---------
@@ -18,6 +24,7 @@ endif()
 
 if(MSVC)
 	add_compile_options(/utf-8)
+	add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
 endif()
 # ----------------------------
 
@@ -34,6 +41,7 @@ target_sources(Engine PRIVATE ${ENGINE_SOURCES})
 target_include_directories(Engine PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/src"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/vendor/spdlog/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Lithen/vendor/glfw/include"
 )
 
 target_compile_definitions(Engine PRIVATE LN_BUILD_DLL)
@@ -43,6 +51,12 @@ target_compile_definitions(Engine PUBLIC
 	$<$<CONFIG:Release>:LN_RELEASE>
 	$<$<CONFIG:Dist>:LN_DIST>
 )
+
+target_link_libraries(Engine PRIVATE glfw)
+
+if(WIN32)
+    target_link_libraries(Engine PRIVATE opengl32)
+endif()
 
 set_target_properties(Engine PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_BASE}/Lithen"
