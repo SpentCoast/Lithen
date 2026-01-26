@@ -13,11 +13,13 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Lithen/vendor/GLFW/include"
+IncludeDir["Glad"] = "Lithen/vendor/Glad/include"
 
 include "Lithen/vendor/GLFW"
+include "Lithen/vendor/Glad"
 
 project "Lithen"
-    location "Lithen"
+	location "Lithen"
 	kind "SharedLib"
 	language "C++"
 
@@ -37,23 +39,27 @@ project "Lithen"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links 
 	{ 
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
+		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
 			"LN_PLATFORM_WINDOWS",
-			"LN_BUILD_DLL"
+			"LN_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -63,15 +69,17 @@ project "Lithen"
 
 	filter "configurations:Debug"
 		defines "LN_DEBUG"
-		buildoptions "/utf-8"
+		buildoptions { "/utf-8", "/MDd" }
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LN_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LN_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -96,12 +104,12 @@ project "Sandbox"
 
 	links
 	{
-		"Lithen",
-		"gdi32"
+		"Lithen"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
+		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -111,7 +119,7 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "LN_DEBUG"
-		buildoptions "/utf-8"
+		buildoptions { "/utf-8", "/MDd" }
 		symbols "On"
 
 	filter "configurations:Release"

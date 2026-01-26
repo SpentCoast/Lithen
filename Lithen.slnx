@@ -5,6 +5,8 @@
     <BuildType Name="Release" />
     <Platform Name="x64" />
   </Configurations>
+  <Project Path="Lithen\vendor\Glad\Glad.vcxproj" Id="BDD6857C-A90D-870D-52FA-6C103E10030F">
+  </Project>
   <Project Path="Lithen\vendor\GLFW\GLFW.vcxproj" Id="154B857C-0182-860D-AA6E-6C109684020F">
   </Project>
   <Project Path="Lithen\Lithen.vcxproj" Id="4985D4C0-3527-FF96-1EE2-12EB0A2386E7">
