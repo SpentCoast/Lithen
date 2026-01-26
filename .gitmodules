@@ -4,3 +4,6 @@
 [submodule "Lithen/vendor/spdlog"]
 	path = Lithen/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Lithen/vendor/imgui"]
+	path = Lithen/vendor/imgui
+	url = https://github.com/SpentCoast/imgui
