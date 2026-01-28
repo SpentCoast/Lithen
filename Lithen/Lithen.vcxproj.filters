@@ -65,6 +65,7 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="vendor\imgui\backends\imgui_impl_glfw.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lithen\Application.cpp">
@@ -89,5 +90,6 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="vendor\imgui\backends\imgui_impl_glfw.cpp" />
   </ItemGroup>
 </Project>

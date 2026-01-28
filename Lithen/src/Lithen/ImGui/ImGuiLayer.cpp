@@ -1,11 +1,17 @@
 #include "lnpch.h"
 #include "ImGuiLayer.h"
 
-#include "imgui.h"
+#include <imgui.h>
+#include <backends/imgui_impl_glfw.h>
+
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
-#include <GLFW/glfw3.h>
+#include "Platform/Windows/WindowsWindow.h"
 
 #include "Lithen/Application.h"
+
+// Temporary
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Lithen
 {
@@ -27,6 +33,8 @@ namespace Lithen
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
+		GLFWwindow* nativeWindow = (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow();
+		ImGui_ImplGlfw_InitForOpenGL(nativeWindow, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
@@ -43,7 +51,7 @@ namespace Lithen
 		float time = (float)glfwGetTime();
 		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
 		m_Time = time;
-	
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
@@ -56,5 +64,6 @@ namespace Lithen
 
 	void ImGuiLayer::OnEvent(Event& event)
 	{
+		
 	}
 }

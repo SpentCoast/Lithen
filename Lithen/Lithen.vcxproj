@@ -177,6 +177,7 @@
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="vendor\imgui\backends\imgui_impl_glfw.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lithen\Application.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="src\lnpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="vendor\imgui\backends\imgui_impl_glfw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
