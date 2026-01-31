@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "Log.h"
+#include "Input.h"
 
 #include <glad/glad.h>
 
@@ -32,7 +33,7 @@ namespace Lithen
 	void Application::PushOverlay(Layer* overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
-		overlay->OnAttach(); 
+		overlay->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)

@@ -33,7 +33,7 @@ namespace Lithen
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
-		GLFWwindow* nativeWindow = (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow();
+		GLFWwindow* nativeWindow = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(nativeWindow, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
