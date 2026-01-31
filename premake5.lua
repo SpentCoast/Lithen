@@ -24,6 +24,7 @@ project "Lithen"
 	location "Lithen"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "Off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -56,7 +57,6 @@ project "Lithen"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -68,28 +68,31 @@ project "Lithen"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox\"")
 		}
 
 	filter "configurations:Debug"
 		defines "LN_DEBUG"
-		buildoptions { "/utf-8", "/MDd" }
+		runtime "Debug"
+		buildoptions "/utf-8"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LN_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
+		buildoptions "/utf-8"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LN_DIST"
-		buildoptions "/MD"
+		buildoptions "/utf-8"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "Off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -113,7 +116,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -123,15 +125,17 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "LN_DEBUG"
-		buildoptions { "/utf-8", "/MDd" }
+		runtime "Debug"
+		buildoptions "/utf-8"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LN_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
+		buildoptions "/utf-8"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LN_DIST"
-		buildoptions "/MD"
+		buildoptions "/utf-8"
 		optimize "On"

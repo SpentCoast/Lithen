@@ -13,6 +13,9 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform\GLFW">
+      <UniqueIdentifier>{A98C9061-154D-0C98-DE87-55154A075174}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform\OpenGL">
       <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
@@ -58,6 +61,9 @@
     <ClInclude Include="src\Lithen\Window.h">
       <Filter>Lithen</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\GLFW\ImGuiGLFW.h">
+      <Filter>Platform\GLFW</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
@@ -65,7 +71,6 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="vendor\imgui\backends\imgui_impl_glfw.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lithen\Application.cpp">
@@ -83,6 +88,9 @@
     <ClCompile Include="src\Lithen\Log.cpp">
       <Filter>Lithen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\GLFW\ImGuiGLFW.cpp">
+      <Filter>Platform\GLFW</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
@@ -90,6 +98,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="vendor\imgui\backends\imgui_impl_glfw.cpp" />
   </ItemGroup>
 </Project>
