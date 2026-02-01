@@ -7,3 +7,6 @@
 [submodule "Lithen/vendor/imgui"]
 	path = Lithen/vendor/imgui
 	url = https://github.com/SpentCoast/imgui
+[submodule "Lithen/vendor/glm"]
+	path = Lithen/vendor/glm
+	url = https://github.com/icaven/glm
