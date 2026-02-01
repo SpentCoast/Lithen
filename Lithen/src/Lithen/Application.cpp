@@ -41,8 +41,6 @@ namespace Lithen
 		EventDispatcher dispatcher{ e };
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		LN_CORE_TRACE("{0}", e.ToString());
-
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
 			(*--it)->OnEvent(e);
