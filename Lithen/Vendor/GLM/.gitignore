@@ -60,3 +60,5 @@ build*
 /CMakeSettings.json
 .DS_Store
 *.swp
+
+!Build-GLM.lua
