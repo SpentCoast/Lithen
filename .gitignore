@@ -1,5 +1,9 @@
+# Directories
 /.vs
+/Binaries
+
+# Files
 *.vcxproj
 *.filters
 *.user
-/Binaries
+*.sln
