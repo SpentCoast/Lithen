@@ -2,5 +2,4 @@
 *.vcxproj
 *.filters
 *.user
-*.ini
 /Binaries
