@@ -10,6 +10,10 @@ class TestLayer : public Lithen::Layer
 public:
 	virtual void OnUIRender() override
 	{
+		ImGui::Begin("Hello");
+		ImGui::Button("Button");
+		ImGui::End();
+
 		ImGui::ShowDemoWindow();
 	}
 };
