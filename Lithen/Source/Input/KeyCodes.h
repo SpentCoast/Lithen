@@ -167,10 +167,10 @@ namespace Lithen {
 		Button6 = 5,
 		Button7 = 6,
 		Button8 = 7,
-		ButtonLast =   Button8,
-		ButtonLeft =   Button1,
-		ButtonRight =  Button2,
-		ButtonMiddle = Button3
+		Last =   Button8,
+		Left =   Button1,
+		Right =  Button2,
+		Middle = Button3
 	} Button;
 
 	inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode)
