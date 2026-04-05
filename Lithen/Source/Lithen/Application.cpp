@@ -252,6 +252,11 @@ namespace Lithen {
 			}
 
 			glfwSwapBuffers(m_WindowHandle);
+
+			float time = GetTime();
+			m_FrameTime = time - m_LastFrameTime;
+			m_TimeStep = glm::min<float>(m_FrameTime, 0.0333f);
+			m_LastFrameTime = time;
 		}
 	}
 
